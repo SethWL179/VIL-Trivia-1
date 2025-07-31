@@ -1,0 +1,26 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #003366;
+  color: #fff;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+.tile {
+  background: #000099;
+  border: 2px solid #fff;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.category {
+  background: #0000cc;
+  font-weight: bold;
+}
