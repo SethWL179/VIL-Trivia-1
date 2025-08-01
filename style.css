@@ -1,3 +1,4 @@
+/* Reset and base styles */
 body, html {
   margin: 0;
   height: 100%;
@@ -6,6 +7,7 @@ body, html {
   color: #fff;
 }
 
+/* Container with sidebar and main */
 #container {
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -13,13 +15,18 @@ body, html {
   overflow: hidden;
 }
 
+/* Sidebar styles */
 #sidebar {
   background: #001f4d;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
+/* Scoreboard container */
 #scoreboard {
   flex-grow: 1;
   display: flex;
@@ -28,6 +35,7 @@ body, html {
   overflow-y: auto;
 }
 
+/* Individual team box */
 .team {
   background: #000099;
   border: 2px solid #fff;
@@ -43,20 +51,22 @@ body, html {
 }
 
 .team button {
-  margin: 2px;
+  margin: 2px 4px 0 0;
   padding: 5px 8px;
   font-size: 0.8em;
   cursor: pointer;
 }
 
+/* Main content area */
 #main {
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  padding: 20px;
   height: 100%;
   overflow: hidden;
 }
 
+/* Title */
 #title {
   font-size: 2em;
   font-weight: bold;
@@ -64,14 +74,16 @@ body, html {
   margin: 0 0 10px 0;
 }
 
+/* Board grid */
 #board {
   flex-grow: 1;
-  overflow: auto;  /* ✅ allows scrolling for large boards */
+  overflow: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);  /* 6 categories */
+  grid-template-columns: repeat(6, 1fr);
   gap: 8px;
 }
 
+/* Category headers */
 .category {
   background: #0000cc;
   font-weight: bold;
@@ -81,6 +93,7 @@ body, html {
   border-bottom: 4px solid #fff;
 }
 
+/* Tiles for questions */
 .tile {
   background: #000099;
   border: 2px solid #fff;
@@ -101,6 +114,7 @@ body, html {
   pointer-events: none;
 }
 
+/* Modal overlay */
 .modal {
   display: none;
   position: fixed;
@@ -119,17 +133,20 @@ body, html {
   text-align: center;
 }
 
+/* Modal content */
 #modal-content {
   width: 100%;
   max-width: 90%;
 }
 
+/* Modal category */
 #modal-category {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
+/* Modal question/answer text */
 #modal-text {
   font-size: 2em;
   line-height: 1.2;
@@ -137,6 +154,7 @@ body, html {
   word-wrap: break-word;
 }
 
+/* Modal team buttons container */
 #modal-teams {
   margin-top: 40px;
   display: flex;
@@ -145,6 +163,7 @@ body, html {
   justify-content: center;
 }
 
+/* Modal team buttons */
 #modal-teams button {
   background: #000099;
   border: 2px solid #fff;
