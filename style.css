@@ -19,6 +19,7 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 
@@ -57,6 +58,13 @@ body, html {
   padding: 20px;
   height: 100%;
   overflow: hidden;
+}
+
+#title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 10px 0;
 }
 
 #board {
@@ -100,8 +108,10 @@ body, html {
   display: none;
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0;
-  width: 100vw; height: 100vh;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   background: #001f4d;
   color: #fff;
   display: flex;
@@ -110,6 +120,7 @@ body, html {
   padding: 40px;
   box-sizing: border-box;
   text-align: center;
+  cursor: pointer;
 }
 
 #modal-content {
@@ -128,22 +139,4 @@ body, html {
   line-height: 1.2;
   max-width: 90%;
   word-wrap: break-word;
-  cursor: pointer;
-}
-
-#modal-teams {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-}
-
-#modal-teams button {
-  background: #000099;
-  border: 2px solid #fff;
-  color: #fff;
-  font-size: 1em;
-  padding: 10px 20px;
-  cursor: pointer;
 }
