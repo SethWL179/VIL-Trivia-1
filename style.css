@@ -61,38 +61,38 @@ body, html {
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   flex-grow: 1;
-  max-height: calc(100vh - 120px); /* leave some room for padding */
+  max-height: calc(100vh - 150px); /* leave room for padding and header */
   overflow: hidden;
 }
 
-/* Categories smaller and fitting nicely */
+/* Smaller, readable categories */
 .category {
   background: #0000cc;
   font-weight: 900;
-  padding: 15px 10px;
-  font-size: 1.6em;      /* smaller but still bold */
+  padding: 12px 10px;
+  font-size: 1.3em;
   text-align: center;
   border-bottom: 4px solid #fff;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   user-select: none;
   white-space: normal;
   word-wrap: break-word;
 }
 
-/* Tiles smaller and balanced */
+/* Balanced tile size */
 .tile {
   background: #000099;
   border: 2px solid #fff;
-  padding: 25px 0;
+  padding: 20px 0;
   cursor: pointer;
-  font-size: 1.3em;
+  font-size: 1.2em;
   text-align: center;
   user-select: none;
   transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80px;
+  min-height: 65px;
 }
 
 .tile.used {
@@ -114,29 +114,29 @@ body, html {
   background: #001f4d;
   color: #fff;
   overflow: hidden;
-}
-
-#modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 85vw;
-  height: 80vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
 }
 
-#modal-category {
-  font-size: 2.8em;      /* smaller, fits well */
-  font-weight: 900;
-  margin-bottom: 30px;
+#modal-content {
+  max-width: 900px;
+  max-height: 80vh;
+  text-align: center;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   user-select: none;
+}
+
+#modal-category {
+  font-size: 2.5em;
+  font-weight: 900;
+  margin-bottom: 25px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -144,21 +144,17 @@ body, html {
 }
 
 #modal-text {
-  font-size: 2.5em;         /* big but no scroll */
+  font-size: 2.8em;
   line-height: 1.2;
-  user-select: none;
-  /* Remove max-height and scrolling */
   white-space: normal;
-  overflow: visible;
   word-break: break-word;
   max-width: 100%;
   max-height: 100%;
-  margin: 0 auto;
+  overflow: visible;
 }
 
-/* Buttons can be removed if you keep click-to-toggle */
 #modal button {
-  display: none;
+  display: none; /* hide buttons, we use click anywhere */
 }
 
 #fileInput {
