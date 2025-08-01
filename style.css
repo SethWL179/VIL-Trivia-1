@@ -64,9 +64,10 @@ body, html {
 .category {
   background: #0000cc;
   font-weight: bold;
-  padding: 20px;
-  font-size: 1.2em;
+  padding: 30px;
+  font-size: 2em;  /* Larger categories */
   text-align: center;
+  border-bottom: 4px solid #fff;
 }
 
 .tile {
@@ -74,7 +75,7 @@ body, html {
   border: 2px solid #fff;
   padding: 40px;
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: 1.8em;
   text-align: center;
 }
 
@@ -86,19 +87,40 @@ body, html {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.95);
+  background: #001f4d;
+  color: #fff;
 }
 
 #modal-content {
-  background: #003366;
-  margin: 5% auto;
-  padding: 30px;
-  max-width: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 80%;
+}
+
+#modal-category {
+  font-size: 3em;
+  margin-bottom: 40px;
+}
+
+#modal-text {
+  font-size: 2.5em;
+  margin-bottom: 40px;
 }
 
 #modal button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1em;
+  margin: 20px;
+  padding: 20px 40px;
+  font-size: 1.5em;
   cursor: pointer;
+  background: #0000cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+#fileInput {
+  margin-bottom: 20px;
 }
