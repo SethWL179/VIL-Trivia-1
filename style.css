@@ -67,7 +67,7 @@ body, html {
 
 #board {
   flex-grow: 1;
-  overflow-y: auto;   /* <--- enables vertical scrolling if needed */
+  overflow-y: auto;   /* allows vertical scrolling for large boards */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
@@ -77,7 +77,7 @@ body, html {
   background: #0000cc;
   font-weight: 900;
   padding: 12px 10px;
-  font-size: 1.3em;
+  font-size: 1.3em; /* fits well on standard screens */
   text-align: center;
   border-bottom: 4px solid #fff;
   letter-spacing: 0.03em;
@@ -123,39 +123,34 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
+  text-align: center;
 }
 
 #modal-content {
-  max-width: 900px;
-  max-height: 90vh;
-  text-align: center;
-  overflow: visible;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  user-select: none;
 }
 
 #modal-category {
-  font-size: 2.5em;
-  font-weight: 900;
-  margin-bottom: 25px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  font-size: 4vw; /* scales with viewport width */
+  font-weight: bold;
+  margin-bottom: 2vh;
 }
 
 #modal-text {
-  font-size: 2.8em;
+  font-size: 6vw; /* big! scales with viewport width */
   line-height: 1.2;
-  white-space: normal;
   word-break: break-word;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 80%;
   overflow: visible;
 }
 
