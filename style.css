@@ -1,4 +1,3 @@
-/* Reset and base styles */
 body, html {
   margin: 0;
   height: 100%;
@@ -7,7 +6,6 @@ body, html {
   color: #fff;
 }
 
-/* Container with sidebar and main */
 #container {
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -15,18 +13,15 @@ body, html {
   overflow: hidden;
 }
 
-/* Sidebar styles */
 #sidebar {
   background: #001f4d;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-sizing: border-box;
   overflow-y: auto;
 }
 
-/* Scoreboard container */
 #scoreboard {
   flex-grow: 1;
   display: flex;
@@ -35,7 +30,6 @@ body, html {
   overflow-y: auto;
 }
 
-/* Individual team box */
 .team {
   background: #000099;
   border: 2px solid #fff;
@@ -57,7 +51,6 @@ body, html {
   cursor: pointer;
 }
 
-/* Main content area */
 #main {
   display: flex;
   flex-direction: column;
@@ -66,15 +59,6 @@ body, html {
   overflow: hidden;
 }
 
-/* Title */
-#title {
-  font-size: 2em;
-  font-weight: bold;
-  text-align: center;
-  margin: 0 0 10px 0;
-}
-
-/* Board grid */
 #board {
   flex-grow: 1;
   overflow: auto;
@@ -83,7 +67,6 @@ body, html {
   gap: 8px;
 }
 
-/* Category headers */
 .category {
   background: #0000cc;
   font-weight: bold;
@@ -93,7 +76,6 @@ body, html {
   border-bottom: 4px solid #fff;
 }
 
-/* Tiles for questions */
 .tile {
   background: #000099;
   border: 2px solid #fff;
@@ -114,15 +96,12 @@ body, html {
   pointer-events: none;
 }
 
-/* Modal overlay */
 .modal {
   display: none;
   position: fixed;
   z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
   background: #001f4d;
   color: #fff;
   display: flex;
@@ -133,28 +112,25 @@ body, html {
   text-align: center;
 }
 
-/* Modal content */
 #modal-content {
   width: 100%;
   max-width: 90%;
 }
 
-/* Modal category */
 #modal-category {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* Modal question/answer text */
 #modal-text {
   font-size: 2em;
   line-height: 1.2;
   max-width: 90%;
   word-wrap: break-word;
+  cursor: pointer;
 }
 
-/* Modal team buttons container */
 #modal-teams {
   margin-top: 40px;
   display: flex;
@@ -163,7 +139,6 @@ body, html {
   justify-content: center;
 }
 
-/* Modal team buttons */
 #modal-teams button {
   background: #000099;
   border: 2px solid #fff;
