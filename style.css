@@ -54,18 +54,25 @@ body, html {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  height: 100%;
+}
+
+#title {
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 10px 0;
+  color: #fff;
 }
 
 #board {
+  flex-grow: 1;
+  overflow-y: auto;   /* <--- enables vertical scrolling if needed */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
-  flex-grow: 1;
-  max-height: calc(100vh - 150px); /* leave room for padding and header */
-  overflow: hidden;
 }
 
-/* Smaller, readable categories */
 .category {
   background: #0000cc;
   font-weight: 900;
@@ -79,7 +86,6 @@ body, html {
   word-wrap: break-word;
 }
 
-/* Balanced tile size */
 .tile {
   background: #000099;
   border: 2px solid #fff;
@@ -123,7 +129,7 @@ body, html {
 
 #modal-content {
   max-width: 900px;
-  max-height: 80vh;
+  max-height: 90vh;
   text-align: center;
   overflow: visible;
   display: flex;
@@ -151,10 +157,6 @@ body, html {
   max-width: 100%;
   max-height: 100%;
   overflow: visible;
-}
-
-#modal button {
-  display: none; /* hide buttons, we use click anywhere */
 }
 
 #fileInput {
