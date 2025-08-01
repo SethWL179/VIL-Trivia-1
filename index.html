@@ -6,26 +6,36 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Upload a CSV to Build Jeopardy</h1>
-  <input type="file" id="fileInput" accept=".csv" />
-  <div id="board"></div>
+  <div id="container">
+    <!-- Sidebar for teams -->
+    <div id="sidebar">
+      <h2>Teams</h2>
+      <div id="scoreboard"></div>
+      <button id="addTeam">Add Team</button>
+    </div>
+
+    <!-- Main area for board & input -->
+    <div id="main">
+      <h1>Jeopardy Board</h1>
+
+      <h3>Paste questions below (CSV format: Category,Question,Answer):</h3>
+      <textarea id="textInput" placeholder="Category,Question,Answer&#10;History,Who was the first US president?,George Washington"></textarea><br>
+      <button id="buildBtn">Build Board</button>
+
+      <div id="board"></div>
+    </div>
+  </div>
 
   <!-- Full-screen modal -->
   <div id="modal" class="modal">
     <div id="modal-content">
+      <h2 id="modal-category"></h2>
       <p id="modal-text"></p>
       <button id="toggle">Show Answer</button>
       <button id="close">Close</button>
     </div>
   </div>
 
-  <!-- Scoreboard -->
-  <h2>Scoreboard</h2>
-  <div id="scoreboard"></div>
-  <button id="addTeam">Add Team</button>
-
-  <!-- PapaParse for CSV parsing -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
