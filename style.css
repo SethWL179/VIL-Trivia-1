@@ -53,37 +53,32 @@ body, html {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   height: 100%;
+  overflow: hidden;
 }
 
 #title {
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: bold;
   text-align: center;
   margin: 0 0 10px 0;
-  color: #fff;
 }
 
 #board {
   flex-grow: 1;
-  overflow-y: auto;   /* allows vertical scrolling for large boards */
+  overflow: auto;  /* ✅ allows scrolling for large boards */
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);  /* 6 categories */
   gap: 8px;
 }
 
 .category {
   background: #0000cc;
-  font-weight: 900;
-  padding: 12px 10px;
-  font-size: 1.3em; /* fits well on standard screens */
+  font-weight: bold;
+  padding: 12px 8px;
+  font-size: 1.2em;
   text-align: center;
   border-bottom: 4px solid #fff;
-  letter-spacing: 0.03em;
-  user-select: none;
-  white-space: normal;
-  word-wrap: break-word;
 }
 
 .tile {
@@ -91,14 +86,12 @@ body, html {
   border: 2px solid #fff;
   padding: 20px 0;
   cursor: pointer;
-  font-size: 1.6em; /* larger point values */
+  font-size: 1.5em;
   text-align: center;
   user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 65px;
 }
 
 .tile.used {
@@ -106,7 +99,6 @@ body, html {
   color: #ccc !important;
   cursor: default !important;
   pointer-events: none;
-  user-select: none;
 }
 
 .modal {
@@ -119,7 +111,6 @@ body, html {
   height: 100vh;
   background: #001f4d;
   color: #fff;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,28 +121,20 @@ body, html {
 
 #modal-content {
   width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 90%;
 }
 
 #modal-category {
-  font-size: 4vw; /* scales with viewport width */
+  font-size: 2em;
   font-weight: bold;
-  margin-bottom: 2vh;
+  margin-bottom: 20px;
 }
 
 #modal-text {
-  font-size: 6vw; /* big! scales with viewport width */
+  font-size: 2em;
   line-height: 1.2;
-  word-break: break-word;
   max-width: 90%;
-  max-height: 80%;
-  overflow: visible;
+  word-wrap: break-word;
 }
 
 #modal-teams {
@@ -166,11 +149,7 @@ body, html {
   background: #000099;
   border: 2px solid #fff;
   color: #fff;
-  font-size: 1.5em;
+  font-size: 1em;
   padding: 10px 20px;
   cursor: pointer;
-}
-
-#fileInput {
-  margin-bottom: 20px;
 }
