@@ -12,23 +12,34 @@ let showingQuestion = true;
 
 buildBtn.addEventListener("click", () => {
   const text = textInput.value.trim();
-  const lines = text.split("\n").filter(line => line);
+  const lines = text.split("\n").filter(line => line.trim());
   const data = [];
 
-  for (let i = 1; i < lines.length; i++) {
-    const parts = lines[i].split(",");
+  // Improved: skip lines that are obviously the header line
+  lines.forEach((line, index) => {
+    // Skip header if present
+    if (line.toLowerCase().startsWith("category")) return;
+
+    const parts = line.split(",");
     if (parts.length >= 3) {
       data.push({
         Category: parts[0].trim(),
         Question: parts[1].trim(),
-        Answer: parts.slice(2).join(",").trim()
+        Answer: parts.slice(2).join(",").trim() // Allows commas in answers
       });
     }
-  }
+  });
+
+  console.log("Parsed data:", data);
   buildBoard(data);
 });
 
 function buildBoard(data) {
+  if (data.length === 0) {
+    alert("No valid questions found. Did you paste the text in the right format?");
+    return;
+  }
+
   board.innerHTML = "";
 
   const categories = {};
