@@ -1,111 +1,111 @@
-const fileInput = document.getElementById("fileInput");
-const board = document.getElementById("board");
-const modal = document.getElementById("modal");
-const modalText = document.getElementById("modal-text");
-const modalCategory = document.getElementById("modal-category");
+let teams = [];
+let showingAnswer = false;
+let currentTile = null;
+let currentValue = 0;
 
-let currentQA = { question: "", answer: "", category: "" };
-let showingQuestion = true;
-let activeTile = null; // track currently open tile
+document.getElementById('addTeam').addEventListener('click', () => {
+  const team = {
+    name: `Team ${teams.length + 1}`,
+    score: 0
+  };
+  teams.push(team);
+  renderTeams();
+});
 
-fileInput.addEventListener("change", () => {
-  const file = fileInput.files[0];
-  if (!file) return;
+function renderTeams() {
+  const scoreboard = document.getElementById('scoreboard');
+  scoreboard.innerHTML = '';
+  teams.forEach((team, i) => {
+    const div = document.createElement('div');
+    div.className = 'team';
+    div.innerHTML = `
+      <input value="${team.name}" onchange="teams[${i}].name = this.value" />
+      <div>Score: ${team.score}</div>
+      <button onclick="teams[${i}].score -= 100; renderTeams()">-100</button>
+      <button onclick="teams[${i}].score += 100; renderTeams()">+100</button>
+    `;
+    scoreboard.appendChild(div);
+  });
+}
 
-  Papa.parse(file, {
+document.getElementById('fileInput').addEventListener('change', function (e) {
+  Papa.parse(e.target.files[0], {
     header: true,
-    skipEmptyLines: true,
-    complete: function(results) {
+    complete: function (results) {
       buildBoard(results.data);
     }
   });
 });
 
 function buildBoard(data) {
-  if (data.length === 0) {
-    alert("No valid questions found. Check your CSV format.");
-    return;
-  }
+  const board = document.getElementById('board');
+  board.innerHTML = '';
 
-  board.innerHTML = "";
-
-  const categories = {};
-
-  data.forEach(row => {
-    if (!row.Category || !row.Question || !row.Answer) return;
-
-    if (!categories[row.Category]) {
-      categories[row.Category] = [];
-    }
-    categories[row.Category].push({
-      question: row.Question,
-      answer: row.Answer
-    });
-  });
-
-  const catNames = Object.keys(categories).slice(0, 5);
-
-  // Add category headers
-  catNames.forEach(name => {
-    const div = document.createElement("div");
-    div.className = "category";
-    div.textContent = name;
+  const categories = [...new Set(data.map(q => q.Category))];
+  categories.forEach(cat => {
+    const div = document.createElement('div');
+    div.className = 'category';
+    div.textContent = cat;
     board.appendChild(div);
   });
 
-  // Add tiles row by row
-  for (let i = 0; i < 5; i++) {
-    const pointValue = (i + 1) * 100;
-    catNames.forEach(name => {
-      const q = categories[name][i];
-      if (q) {
-        const tile = document.createElement("div");
-        tile.className = "tile";
-        tile.textContent = `$${pointValue}`;
-        tile.style.cursor = "pointer";
-        tile.addEventListener("click", () => {
-          // Prevent reopening if disabled
-          if (tile.classList.contains("used")) return;
+  const maxQuestions = data.length / categories.length;
 
-          activeTile = tile;
-          showModal(q, name);
-        });
-        board.appendChild(tile);
+  for (let i = 0; i < maxQuestions; i++) {
+    categories.forEach(cat => {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      const value = (i + 1) * 100;
+      tile.textContent = value;
+      tile.dataset.category = cat;
+      tile.dataset.value = value;
+      const question = data.find(q => q.Category === cat && parseInt(q.Value) === value);
+      if (question) {
+        tile.dataset.question = question.Question;
+        tile.dataset.answer = question.Answer;
+        tile.addEventListener('click', () => openModal(tile));
+      } else {
+        tile.textContent = '';
       }
+      board.appendChild(tile);
     });
   }
 }
 
-function showModal(q, category) {
-  currentQA = { ...q, category };
-  showingQuestion = true;
-  modalCategory.textContent = category;
-  modalText.textContent = q.question;
-  modal.style.display = "flex";
-  modal.style.flexDirection = "column";
-  modal.style.justifyContent = "center";
-  modal.style.alignItems = "center";
-  modal.style.textAlign = "center";
-  modal.style.cursor = "pointer";
+function openModal(tile) {
+  currentTile = tile;
+  currentValue = parseInt(tile.dataset.value);
+  showingAnswer = false;
+  document.getElementById('modal').style.display = 'flex';
+  document.getElementById('modal-category').textContent = tile.dataset.category;
+  document.getElementById('modal-text').textContent = tile.dataset.question;
+
+  // Clear and show team buttons
+  const modalTeams = document.getElementById('modal-teams');
+  modalTeams.innerHTML = '';
+  teams.forEach((team, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = team.name;
+    btn.addEventListener('click', () => {
+      teams[i].score += currentValue;
+      renderTeams();
+      closeModal();
+    });
+    modalTeams.appendChild(btn);
+  });
 }
 
-modal.addEventListener("click", () => {
-  if (showingQuestion) {
-    // Show answer
-    modalText.textContent = currentQA.answer;
-    showingQuestion = false;
-  } else {
-    // Close modal
-    modal.style.display = "none";
-    showingQuestion = true;
-    // Grey out and disable the tile
-    if (activeTile) {
-      activeTile.classList.add("used");
-      activeTile.style.backgroundColor = "#555555";
-      activeTile.style.color = "#ccc";
-      activeTile.style.cursor = "default";
-      activeTile.removeEventListener("click", null); // remove all listeners
-      activeTile = null;
-    }
+document.getElementById('modal').addEventListener('click', function (e) {
+  // Ignore clicks on team buttons
+  if (e.target.closest('#modal-teams')) return;
+
+  if (!showingAnswer) {
+    document.getElementById('modal-text').textContent = currentTile.dataset.answer;
+    showingAnswer = true;
   }
 });
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+  currentTile.classList.add('used');
+}
