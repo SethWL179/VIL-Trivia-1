@@ -80,6 +80,15 @@ body, html {
   font-size: 2em;
   text-align: center;
   user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tile.used {
+  background-color: #555555 !important;
+  color: #ccc !important;
+  cursor: default !important;
+  pointer-events: none;
+  user-select: none;
 }
 
 .modal {
