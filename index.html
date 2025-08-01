@@ -2,17 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Jeopardy Board Debug Test</title>
+  <title>Jeopardy Board</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Debug Jeopardy</h1>
+  <div id="container">
+    <!-- Sidebar for teams -->
+    <div id="sidebar">
+      <h2>Teams</h2>
+      <div id="scoreboard"></div>
+      <button id="addTeam">Add Team</button>
+    </div>
 
-  <textarea id="textInput" placeholder="Paste trivia here"></textarea><br>
-  <button id="buildBtn">Build Board</button>
+    <!-- Main area for board & file upload -->
+    <div id="main">
+      <h1>Jeopardy Board</h1>
 
-  <div id="board"></div>
+      <input type="file" id="fileInput" accept=".csv" /><br><br>
 
+      <div id="board"></div>
+    </div>
+  </div>
+
+  <!-- Full-screen modal -->
+  <div id="modal" class="modal">
+    <div id="modal-content">
+      <h2 id="modal-category"></h2>
+      <p id="modal-text"></p>
+      <button id="toggle">Show Answer</button>
+      <button id="close">Close</button>
+    </div>
+  </div>
+
+  <!-- PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
