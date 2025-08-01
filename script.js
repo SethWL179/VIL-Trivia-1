@@ -4,10 +4,7 @@ let currentTile = null;
 let currentValue = 0;
 
 document.getElementById('addTeam').addEventListener('click', () => {
-  const team = {
-    name: `Team ${teams.length + 1}`,
-    score: 0
-  };
+  const team = { name: `Team ${teams.length + 1}`, score: 0 };
   teams.push(team);
   renderTeams();
 });
@@ -31,7 +28,12 @@ function renderTeams() {
 document.getElementById('fileInput').addEventListener('change', function (e) {
   Papa.parse(e.target.files[0], {
     header: true,
+    skipEmptyLines: true,
     complete: function (results) {
+      if (results.data.length === 0) {
+        alert("CSV is empty or formatted incorrectly.");
+        return;
+      }
       buildBoard(results.data);
     }
   });
@@ -49,27 +51,26 @@ function buildBoard(data) {
     board.appendChild(div);
   });
 
-  const maxQuestions = data.length / categories.length;
+  const values = [...new Set(data.map(q => parseInt(q.Value)))].sort((a, b) => a - b);
 
-  for (let i = 0; i < maxQuestions; i++) {
+  values.forEach(value => {
     categories.forEach(cat => {
       const tile = document.createElement('div');
       tile.className = 'tile';
-      const value = (i + 1) * 100;
       tile.textContent = value;
-      tile.dataset.category = cat;
-      tile.dataset.value = value;
       const question = data.find(q => q.Category === cat && parseInt(q.Value) === value);
       if (question) {
         tile.dataset.question = question.Question;
         tile.dataset.answer = question.Answer;
+        tile.dataset.value = value;
+        tile.dataset.category = cat;
         tile.addEventListener('click', () => openModal(tile));
       } else {
         tile.textContent = '';
       }
       board.appendChild(tile);
     });
-  }
+  });
 }
 
 function openModal(tile) {
@@ -80,7 +81,6 @@ function openModal(tile) {
   document.getElementById('modal-category').textContent = tile.dataset.category;
   document.getElementById('modal-text').textContent = tile.dataset.question;
 
-  // Clear and show team buttons
   const modalTeams = document.getElementById('modal-teams');
   modalTeams.innerHTML = '';
   teams.forEach((team, i) => {
@@ -96,9 +96,7 @@ function openModal(tile) {
 }
 
 document.getElementById('modal').addEventListener('click', function (e) {
-  // Ignore clicks on team buttons
   if (e.target.closest('#modal-teams')) return;
-
   if (!showingAnswer) {
     document.getElementById('modal-text').textContent = currentTile.dataset.answer;
     showingAnswer = true;
