@@ -1,23 +1,31 @@
-const fileInput = document.getElementById("fileInput");
+const buildBtn = document.getElementById("buildBtn");
+const textInput = document.getElementById("textInput");
 const board = document.getElementById("board");
 const modal = document.getElementById("modal");
 const modalText = document.getElementById("modal-text");
+const modalCategory = document.getElementById("modal-category");
 const toggleBtn = document.getElementById("toggle");
 const closeBtn = document.getElementById("close");
 
-let currentQA = { question: "", answer: "" };
+let currentQA = { question: "", answer: "", category: "" };
 let showingQuestion = true;
 
-fileInput.addEventListener("change", event => {
-  const file = event.target.files[0];
-  if (file) {
-    Papa.parse(file, {
-      header: true,
-      complete: function(results) {
-        buildBoard(results.data);
-      }
-    });
+buildBtn.addEventListener("click", () => {
+  const text = textInput.value.trim();
+  const lines = text.split("\n").filter(line => line);
+  const data = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const parts = lines[i].split(",");
+    if (parts.length >= 3) {
+      data.push({
+        Category: parts[0].trim(),
+        Question: parts[1].trim(),
+        Answer: parts.slice(2).join(",").trim()
+      });
+    }
   }
+  buildBoard(data);
 });
 
 function buildBoard(data) {
@@ -37,7 +45,6 @@ function buildBoard(data) {
 
   const catNames = Object.keys(categories).slice(0, 5);
 
-  // Add category headers
   catNames.forEach(name => {
     const div = document.createElement("div");
     div.className = "category";
@@ -45,7 +52,6 @@ function buildBoard(data) {
     board.appendChild(div);
   });
 
-  // Add tiles with point values
   for (let i = 0; i < 5; i++) {
     const pointValue = (i + 1) * 100;
     catNames.forEach(name => {
@@ -54,16 +60,17 @@ function buildBoard(data) {
         const tile = document.createElement("div");
         tile.className = "tile";
         tile.textContent = `$${pointValue}`;
-        tile.addEventListener("click", () => showModal(q));
+        tile.addEventListener("click", () => showModal(q, name));
         board.appendChild(tile);
       }
     });
   }
 }
 
-function showModal(q) {
-  currentQA = q;
+function showModal(q, category) {
+  currentQA = { ...q, category };
   showingQuestion = true;
+  modalCategory.textContent = category;
   modalText.textContent = q.question;
   toggleBtn.textContent = "Show Answer";
   modal.style.display = "block";
