@@ -2,40 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Jeopardy Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VIL Trivia</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- PapaParse for CSV parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
   <div id="container">
-    <!-- Sidebar for teams -->
     <div id="sidebar">
-      <h2>Teams</h2>
+      <input type="file" id="fileInput" />
       <div id="scoreboard"></div>
-      <button id="addTeam">Add Team</button>
     </div>
-
-    <!-- Main area for board & file upload -->
     <div id="main">
-      <h1>Jeopardy Board</h1>
-
-      <input type="file" id="fileInput" accept=".csv" /><br><br>
-
+      <h1 id="title">VIL Trivia</h1>
       <div id="board"></div>
     </div>
   </div>
 
-  <!-- Full-screen modal -->
-  <div id="modal" class="modal">
+  <div class="modal" id="modal">
     <div id="modal-content">
-      <h2 id="modal-category"></h2>
-      <p id="modal-text"></p>
-      <button id="toggle">Show Answer</button>
-      <button id="close">Close</button>
+      <div id="modal-category"></div>
+      <div id="modal-text"></div>
     </div>
   </div>
 
-  <!-- PapaParse -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
