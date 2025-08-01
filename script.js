@@ -3,14 +3,12 @@ let showingAnswer = false;
 let currentTile = null;
 let currentValue = 0;
 
-// Add Team button handler
 document.getElementById('addTeam').addEventListener('click', () => {
   const team = { name: `Team ${teams.length + 1}`, score: 0 };
   teams.push(team);
   renderTeams();
 });
 
-// Render teams on scoreboard
 function renderTeams() {
   const scoreboard = document.getElementById('scoreboard');
   scoreboard.innerHTML = '';
@@ -27,7 +25,6 @@ function renderTeams() {
   });
 }
 
-// File input CSV parser using PapaParse
 document.getElementById('fileInput').addEventListener('change', function (e) {
   const file = e.target.files[0];
   if (!file) return;
@@ -44,12 +41,10 @@ document.getElementById('fileInput').addEventListener('change', function (e) {
   });
 });
 
-// Build the board grid
 function buildBoard(data) {
   const board = document.getElementById('board');
   board.innerHTML = '';
 
-  // Get unique categories
   const categories = [...new Set(data.map(q => q.Category))];
   categories.forEach(cat => {
     const div = document.createElement('div');
@@ -58,7 +53,6 @@ function buildBoard(data) {
     board.appendChild(div);
   });
 
-  // Get unique values (points) sorted ascending
   const values = [...new Set(data.map(q => parseInt(q.Value)))].sort((a, b) => a - b);
 
   values.forEach(value => {
@@ -82,7 +76,6 @@ function buildBoard(data) {
   });
 }
 
-// Open modal to show question / answer and teams
 function openModal(tile) {
   currentTile = tile;
   currentValue = parseInt(tile.dataset.value);
@@ -111,7 +104,6 @@ function openModal(tile) {
   });
 }
 
-// Clicking modal text toggles question/answer
 document.getElementById('modal-text').addEventListener('click', () => {
   if (!showingAnswer && currentTile) {
     document.getElementById('modal-text').textContent = currentTile.dataset.answer;
@@ -119,8 +111,6 @@ document.getElementById('modal-text').addEventListener('click', () => {
   }
 });
 
-// Close modal function
 function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
+  document.getElementById('modal').style.display = 'none';
 }
