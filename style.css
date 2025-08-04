@@ -105,47 +105,39 @@ body, html {
 }
 
 .modal {
-  display: none;               /* hidden by default */
+  display: none;                  /* hidden by default */
   position: fixed;
+  inset: 0;                       /* full screen */
   z-index: 9999;
-  inset: 0;                    /* shorthand for top:0; right:0; bottom:0; left:0 */
-  width: 100vw;
-  height: 100vh;
   background: #001f4d;
   color: #fff;
-
+  
   display: flex;
-  flex-direction: column;      /* stack vertically */
-  justify-content: center;     /* center vertically */
-  align-items: center;         /* center horizontally */
-
+  justify-content: center;        /* center horizontally */
+  align-items: center;            /* center vertically */
+  text-align: center;
   padding: 40px;
   box-sizing: border-box;
-  text-align: center;          /* center text inside */
   cursor: pointer;
 }
 
 #modal-content {
-  max-width: 90%;
-  width: 100%;
-
   display: flex;
-  flex-direction: column;
+  flex-direction: column;         /* stack vertically */
   align-items: center;
   justify-content: center;
-
-  gap: 30px;                   /* space between category and question/answer */
+  max-width: 90vw;
 }
 
 #modal-category {
-  font-size: 3em;              /* larger for visibility */
+  font-size: 5vw;                 /* scale with screen width */
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 30px;
 }
 
 #modal-text {
-  font-size: 3em;
-  line-height: 1.3;
+  font-size: 4vw;                 /* scale with screen width */
+  line-height: 1.2;
   word-wrap: break-word;
-  margin: 0;
+  max-width: 90vw;
 }
